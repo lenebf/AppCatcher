@@ -41,7 +41,6 @@ class ACTransform extends Transform {
         TransformOutputProvider outputProvider = transformInvocation.outputProvider
         assert outputProvider != null
         outputProvider.deleteAll()
-        println("======> delete old output")
         Collection<TransformInput> inputs = transformInvocation.inputs
         ACClassVisitor.clearComponentAppNames()
         inputs.forEach { TransformInput input ->
@@ -53,7 +52,6 @@ class ACTransform extends Transform {
                 }
                 def dest = outputProvider.getContentLocation(directoryInput.name, directoryInput.contentTypes,
                         directoryInput.scopes, Format.DIRECTORY)
-                println("======> directory dest: " + dest)
                 FileUtils.copyDirectory(directoryInput.file, dest)
             }
             input.jarInputs.forEach { JarInput jarInput ->
@@ -87,7 +85,6 @@ class ACTransform extends Transform {
                     }
                 }
                 def dest = outputProvider.getContentLocation(jarInput.name, jarInput.contentTypes, jarInput.scopes, Format.JAR)
-                println("======> jar dest: " + dest)
                 FileUtils.copyFile(jarInput.file, dest)
             }
         }

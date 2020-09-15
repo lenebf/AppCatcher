@@ -31,10 +31,8 @@ public class ACClassVisitor extends ClassVisitor {
     public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
         super.visit(version, access, name, signature, superName, interfaces);
         if (COMPONENT_APP_SUPER_NAME.equals(superName)) {
-            System.out.println("======> Visit class, name: " + name + ", superName: " + superName);
             componentAppNames.add(name);
         } else if (APP_X_NAME.equals(superName)) {
-            System.out.println("======> Visit appx, name: " + name + ", superName: " + superName);
             catcherClassName = name;
             catcherClassPath = classPath;
             buildCatchedApps();
@@ -47,16 +45,11 @@ public class ACClassVisitor extends ClassVisitor {
     }
 
     private static void buildCatchedApps() {
-        System.out.println("======> buildCatchedApps" +
-                ", componentApps: " + componentAppNames +
-                ", catcherClassName: " + catcherClassName +
-                ", catcherClassPath: " + catcherClassPath);
         if (componentAppNames.isEmpty() || catcherClassName == null || catcherClassPath == null) {
             return;
         }
         int nameIndex = catcherClassName.lastIndexOf("/");
         String className = catcherClassName.substring(0, nameIndex + 1) + "CatchedApps";
-        System.out.println("======> catcherClassName: " + className);
 
         ClassWriter cw = new ClassWriter(0);
         // 创建新的类
@@ -93,7 +86,6 @@ public class ACClassVisitor extends ClassVisitor {
 
         nameIndex = catcherClassPath.lastIndexOf(File.separator);
         String classPath = catcherClassPath.substring(0, nameIndex + 1) + "CatchedApps.class";
-        System.out.println("======> catcherClassPath: " + classPath);
 
         FileOutputStream outputStream = null;
         try {
