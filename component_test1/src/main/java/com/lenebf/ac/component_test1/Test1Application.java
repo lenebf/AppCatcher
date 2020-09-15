@@ -1,6 +1,7 @@
 package com.lenebf.ac.component_test1;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.lenebf.ac.component_application.ComponentApplication;
 
@@ -11,6 +12,8 @@ import com.lenebf.ac.component_application.ComponentApplication;
 public class Test1Application extends ComponentApplication {
     @Override
     public void init() {
+        String packageName = getPackageName();
+        Toast.makeText(this, "Toast from component1 application.\n" + packageName, Toast.LENGTH_SHORT).show();
         Log.d("Test1Application", "I'm component test1, function -init- be invoked.");
     }
 
