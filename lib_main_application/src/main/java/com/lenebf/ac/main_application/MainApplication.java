@@ -27,12 +27,14 @@ public abstract class MainApplication extends Application {
     }
 
     public void init(@NonNull Application application) {
+        // 获取ComponentApplication列表
         final List<String> componentAppNames = getComponentApplications(application);
         if (componentAppNames.isEmpty()) {
             return;
         }
         componentApps = new ArrayList<>(componentAppNames.size());
         Context baseContext = getBaseContext();
+        // 初始化ComponentApplication
         for (String componentAppName : componentAppNames) {
             try {
                 componentAppName = componentAppName.replace("/", ".");
@@ -57,7 +59,7 @@ public abstract class MainApplication extends Application {
             @Override
             public void run() {
                 for (ComponentApplication moduleApp : componentApps) {
-                    // 调用init方法
+                    // 调用initBackground方法
                     moduleApp.initBackground();
                 }
                 onComponentAppsInitFinish();
@@ -79,7 +81,13 @@ public abstract class MainApplication extends Application {
         return new ArrayList<>();
     }
 
+    /**
+     * 所有组件Application初始化完成
+     */
     public abstract void onComponentAppsInitFinish();
 
+    /**
+     * 组件初始化过程中出现异常
+     */
     public abstract void onCatchThrowable(Throwable throwable);
 }

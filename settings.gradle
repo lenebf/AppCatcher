@@ -1,6 +1,6 @@
 include ':component_test1'
-include ':app_catcher'
-include ':lib_component_application'
 include ':lib_main_application'
+include ':lib_component_application'
 include ':app'
+include ':ac_gradle_plugin'
 rootProject.name = "AppCatcher"

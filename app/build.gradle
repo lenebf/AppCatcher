@@ -1,7 +1,20 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.lenebf.ac.plugin'
+apply plugin: 'com.lenebf.plugin.ac'
 
 android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "com.lenebf.ac.sample"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
     signingConfigs {
         release {
             storeFile file('../lenebf')
@@ -9,18 +22,6 @@ android {
             keyAlias 'lenebf'
             keyPassword '123456'
         }
-    }
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
-
-    defaultConfig {
-        applicationId "com.lenebf.ac.demo"
-        minSdkVersion 16
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {

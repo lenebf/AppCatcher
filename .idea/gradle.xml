@@ -11,8 +11,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/ac_gradle_plugin" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/app_catcher" />
             <option value="$PROJECT_DIR$/component_test1" />
             <option value="$PROJECT_DIR$/lib_component_application" />
             <option value="$PROJECT_DIR$/lib_main_application" />

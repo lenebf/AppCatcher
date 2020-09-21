@@ -1,6 +1,6 @@
 # AppCatcher
 
-[ ![Download](https://api.bintray.com/packages/lene/maven/ac-plugin/images/download.svg?version=1.0.0) ](https://bintray.com/lene/maven/ac-plugin/1.0.0/link) [中文文档](https://github.com/lenebf/AppCatcher/blob/master/README_CN.md)
+[ ![Download](https://api.bintray.com/packages/lene/maven/ac-plugin/images/download.svg?version=1.0.0) ](https://bintray.com/lene/maven/ac-plugin/1.0.0/link)
 
 An Android library to help component/module initialization.
 
@@ -16,28 +16,18 @@ An Android library to help component/module initialization.
 
 ```groovy
 buildscript {
-    repositories {
-        ...
-        maven { url './repo'}
-    }
+    ...
     dependencies {
         ...
-        classpath "com.lenebf.plugin:app_catcher:1.0.0"
-    }
-}
-
-allprojects {
-    repositories {
-        ...
-        maven { url './repo'}
+        classpath "com.lenebf.plugin:ac:1.0.0"
     }
 }
 ```
 
-**Step 2.** Apply <mark>app_catcher</mark> plugin on your app and add dependencies
+**Step 2.** Apply <mark>'com.lenebf.plugin.ac'</mark> plugin on your app and add dependencies
 
 ```groovy
-apply plugin: 'com.lenebf.ac.plugin'
+apply plugin: 'com.lenebf.plugin.ac'
 
 dependencies {
     implementation project(path: ':lib_main_application')
@@ -79,12 +69,17 @@ public class Test1Application extends ComponentApplication {
 **3. Add confusing rules (If Proguard is turn on)**
 
 ```java
--keep class com.lenebf.ac.demo.CatchedApps {
-    *;
+-keep class * extends com.lenebf.ac.component_application.ComponentApplication {
+*;
+}
+
+# Replace [package name] with your main application package name.
+-keep class [package name].CatchedApps {
+*;
 }
 ```
 
-*That's all you need to do, and the <mark>app_catcher</mark> plugins will take care of the rest automatically!*
+*That's all you need to do, and the <mark>'com.lenebf.plugin.ac'</mark> plugins will take care of the rest automatically!*
 
 ## License
 

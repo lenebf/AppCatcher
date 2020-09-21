@@ -1,4 +1,4 @@
-package com.lenebf.ac.main_application;
+package com.lenebf.ac.sample;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.lenebf.ac.lib_main_application.test", appContext.getPackageName());
+        assertEquals("com.lenebf.ac.sample", appContext.getPackageName());
     }
 }

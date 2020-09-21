@@ -1,0 +1,62 @@
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
+
+ext {
+    pluginGroupId = 'com.lenebf.plugin'
+    pluginVersion = '1.0.0'
+}
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            groupId pluginGroupId
+            artifactId 'ac'
+            version pluginVersion
+        }
+    }
+}
+
+// Bintray keys
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.key")
+    publications = ['MyPublication']
+    pkg {
+        repo = 'maven'
+        name = 'ac-plugin'
+        userOrg = 'lene'
+        licenses = ['GPL-3.0']
+        vcsUrl = 'https://github.com/lenebf/AppCatcher'
+
+        version {
+            name = pluginVersion
+            desc = "App Catcher Plugin $pluginVersion"
+            released = new Date()
+            vcsTag = 'tag_release_1.0.0'
+            attributes = ['ac-plugin': 'com.lenebf.plugin:ac']
+        }
+    }
+}
+
+gradlePlugin {
+    // Define the plugin
+    plugins {
+        ac {
+            id = 'com.lenebf.plugin.ac'
+            implementationClass = 'com.lenebf.plugin.AppCatcherPlugin'
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.android.tools.build:gradle:4.0.1'
+    implementation 'org.ow2.asm:asm:8.0.1'
+    implementation 'org.ow2.asm:asm-commons:8.0.1'
+}

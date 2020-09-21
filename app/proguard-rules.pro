@@ -20,6 +20,10 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.lenebf.ac.demo.CatchedApps {
+-keep class * extends com.lenebf.ac.component_application.ComponentApplication {
+*;
+}
+
+-keep class com.lenebf.ac.sample.CatchedApps {
 *;
 }
