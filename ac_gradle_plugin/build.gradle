@@ -3,19 +3,69 @@ apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
+apply plugin: 'maven'
 
 ext {
     pluginGroupId = 'com.lenebf.plugin'
-    pluginVersion = '1.0.0'
+    pluginVersion = releaseVersion
+}
+def pomConfig = {
+    licenses {
+        license {
+            name "GNU General Public License v3.0"
+            url "https://www.gnu.org/licenses/gpl-3.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "lenebf"
+            name "lenebf"
+            email "lenebf@126.com"
+        }
+    }
+    scm {
+        url "https://github.com/lenebf/AppCatcher"
+    }
+}
+
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    def classifier = getArchiveClassifier()
+    classifier.set('source')
+    classifier.convention('source')
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    def classifier = getArchiveClassifier()
+    classifier.set('javadoc')
+    classifier.convention('javadoc')
+    from javadoc.destinationDir
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
 }
 
 publishing {
     publications {
         MyPublication(MavenPublication) {
             from components.java
+            artifact sourcesJar
+            artifact javadocJar
             groupId pluginGroupId
             artifactId 'ac'
             version pluginVersion
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', 'App catcher gradle plugin.')
+                root.appendNode('name', 'ac-plugin')
+                root.appendNode('url', 'https://github.com/lenebf/AppCatcher')
+                root.children().last() + pomConfig
+            }
         }
     }
 }
@@ -31,7 +81,6 @@ bintray {
     pkg {
         repo = 'maven'
         name = 'ac-plugin'
-        userOrg = 'lene'
         licenses = ['GPL-3.0']
         vcsUrl = 'https://github.com/lenebf/AppCatcher'
 
@@ -39,8 +88,8 @@ bintray {
             name = pluginVersion
             desc = "App Catcher Plugin $pluginVersion"
             released = new Date()
-            vcsTag = 'tag_release_1.0.0'
-            attributes = ['ac-plugin': 'com.lenebf.plugin:ac']
+            // vcsTag = 'tag_release_1.0.1'
+            // attributes = ['ac-plugin': 'com.lenebf.plugin:ac']
         }
     }
 }

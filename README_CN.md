@@ -1,6 +1,6 @@
 # AppCatcher
 
-[ ![Download](https://api.bintray.com/packages/lene/maven/ac-plugin/images/download.svg?version=1.0.0) ](https://bintray.com/lene/maven/ac-plugin/1.0.0/link)
+[![Download](https://api.bintray.com/packages/lenebf/maven/ac-plugin/images/download.svg?version=1.0.3)](https://bintray.com/lenebf/maven/ac-plugin/1.0.3/link) [ ![Download](https://api.bintray.com/packages/lenebf/maven/ac-main-app/images/download.svg?version=1.0.3) ](https://bintray.com/lenebf/maven/ac-main-app/1.0.3/link) [ ![Download](https://api.bintray.com/packages/lenebf/maven/ac-component-app/images/download.svg?version=1.0.3) ](https://bintray.com/lenebf/maven/ac-component-app/1.0.3/link)
 
 An Android library to help component/module initialization.
 
@@ -8,7 +8,7 @@ An Android library to help component/module initialization.
 
 1. Automatic initialization of components
 
-2. The component has a fully functional application instance 
+2. The component has a fully functional application instance
 
 ## Configuration
 
@@ -19,18 +19,18 @@ buildscript {
     ...
     dependencies {
         ...
-        classpath "com.lenebf.plugin:ac:1.0.0"
+        classpath "com.lenebf.plugin:ac:1.0.3"
     }
 }
 ```
 
-**Step 2.** Apply <mark>'com.lenebf.plugin.ac'</mark> plugin on your app and add dependencies
+**Step 2.** Apply 'com.lenebf.plugin.ac' plugin on your app and add dependencies
 
 ```groovy
 apply plugin: 'com.lenebf.plugin.ac'
 
 dependencies {
-    implementation project(path: ':lib_main_application')
+    implementation 'com.lenebf.ac:main-app:1.0.3'
 }
 ```
 
@@ -50,7 +50,13 @@ public class MyApplication extends MainApplication {
 }
 ```
 
-**Step 4.** Let your componetn/module application extend ***<u>ComponentApplication</u>***
+**Step 4.** Add dependencies for your components and Let your componetn/module application extend ***<u>ComponentApplication</u>***
+
+```groovy
+dependencies {
+    implementation 'com.lenebf.ac:component-app:1.0.3'
+}
+```
 
 ```java
 public class Test1Application extends ComponentApplication {
@@ -79,7 +85,7 @@ public class Test1Application extends ComponentApplication {
 }
 ```
 
-*That's all you need to do, and the <mark>'com.lenebf.plugin.ac'</mark> plugins will take care of the rest automatically!*
+*That's all you need to do, and the 'com.lenebf.plugin.ac' plugin will take care of the rest automatically!*
 
 ## License
 

@@ -1,6 +1,6 @@
 # AppCatcher
 
-[ ![Download](https://api.bintray.com/packages/lene/maven/ac-plugin/images/download.svg?version=1.0.0) ](https://bintray.com/lene/maven/ac-plugin/1.0.0/link) [中文文档](https://github.com/lenebf/AppCatcher/blob/master/README_CN.md)
+[ ![Download](https://api.bintray.com/packages/lenebf/maven/ac-plugin/images/download.svg?version=1.0.3) ](https://bintray.com/lenebf/maven/ac-plugin/1.0.3/link) [ ![Download](https://api.bintray.com/packages/lenebf/maven/ac-main-app/images/download.svg?version=1.0.3) ](https://bintray.com/lenebf/maven/ac-main-app/1.0.3/link) [ ![Download](https://api.bintray.com/packages/lenebf/maven/ac-component-app/images/download.svg?version=1.0.3) ](https://bintray.com/lenebf/maven/ac-component-app/1.0.3/link) [中文文档](https://github.com/lenebf/AppCatcher/blob/master/README_CN.md)
 
 An Android library to help component/module initialization.
 
@@ -16,31 +16,21 @@ An Android library to help component/module initialization.
 
 ```groovy
 buildscript {
-    repositories {
-        ...
-        maven { url './repo'}
-    }
+    ...
     dependencies {
         ...
-        classpath "com.lenebf.plugin:app_catcher:1.0.0"
-    }
-}
-
-allprojects {
-    repositories {
-        ...
-        maven { url './repo'}
+        classpath "com.lenebf.plugin:ac:1.0.3"
     }
 }
 ```
 
-**Step 2.** Apply <mark>app_catcher</mark> plugin on your app and add dependencies
+**Step 2.** Apply <mark>'com.lenebf.plugin.ac'</mark> plugin on your app and add dependencies
 
 ```groovy
-apply plugin: 'com.lenebf.ac.plugin'
+apply plugin: 'com.lenebf.plugin.ac'
 
 dependencies {
-    implementation project(path: ':lib_main_application')
+    implementation 'com.lenebf.ac:main-app:1.0.3'
 }
 ```
 
@@ -60,7 +50,13 @@ public class MyApplication extends MainApplication {
 }
 ```
 
-**Step 4.** Let your componetn/module application extend ***<u>ComponentApplication</u>***
+**Step 4.** Add dependencies for your components and Let your componetn/module application extend ***<u>ComponentApplication</u>***
+
+```groovy
+dependencies {
+    implementation 'com.lenebf.ac:component-app:1.0.3'
+}
+```
 
 ```java
 public class Test1Application extends ComponentApplication {
@@ -79,12 +75,17 @@ public class Test1Application extends ComponentApplication {
 **3. Add confusing rules (If Proguard is turn on)**
 
 ```java
--keep class com.lenebf.ac.demo.CatchedApps {
-    *;
+-keep class * extends com.lenebf.ac.component_application.ComponentApplication {
+*;
+}
+
+# Replace [package name] with your main application package name.
+-keep class [package name].CatchedApps {
+*;
 }
 ```
 
-*That's all you need to do, and the <mark>app_catcher</mark> plugins will take care of the rest automatically!*
+*That's all you need to do, and the <mark>'com.lenebf.plugin.ac'</mark> plugin will take care of the rest automatically!*
 
 ## License
 
