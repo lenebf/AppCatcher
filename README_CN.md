@@ -1,6 +1,6 @@
 # AppCatcher
 
-[![Download](https://api.bintray.com/packages/lenebf/maven/ac-plugin/images/download.svg?version=1.0.3)](https://bintray.com/lenebf/maven/ac-plugin/1.0.3/link) [ ![Download](https://api.bintray.com/packages/lenebf/maven/ac-main-app/images/download.svg?version=1.0.3) ](https://bintray.com/lenebf/maven/ac-main-app/1.0.3/link) [ ![Download](https://api.bintray.com/packages/lenebf/maven/ac-component-app/images/download.svg?version=1.0.3) ](https://bintray.com/lenebf/maven/ac-component-app/1.0.3/link)
+[ ![ac-plugin](https://api.bintray.com/packages/lenebf/maven/ac-plugin/images/download.svg) ](https://bintray.com/lenebf/maven/ac-plugin/_latestVersion)[ ![ac-component-app](https://api.bintray.com/packages/lenebf/maven/ac-component-app/images/download.svg) ](https://bintray.com/lenebf/maven/ac-component-app/_latestVersion)[ ![ac-main-app](https://api.bintray.com/packages/lenebf/maven/ac-main-app/images/download.svg) ](https://bintray.com/lenebf/maven/ac-main-app/_latestVersion)
 
 An Android library to help component/module initialization.
 
