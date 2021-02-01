@@ -7,7 +7,7 @@ apply plugin: 'maven'
 
 ext {
     pluginGroupId = 'com.lenebf.plugin'
-    pluginVersion = releaseVersion
+    pluginVersion = ac_version
 }
 def pomConfig = {
     licenses {
@@ -51,6 +51,13 @@ tasks.withType(Javadoc) {
 }
 
 publishing {
+    // 本地测试仓库
+    repositories {
+        maven {
+            // $rootDir 表示你项目的根目录
+            url = "$rootDir/repo"
+        }
+    }
     publications {
         MyPublication(MavenPublication) {
             from components.java
@@ -105,7 +112,7 @@ gradlePlugin {
 }
 
 dependencies {
-    implementation 'com.android.tools.build:gradle:4.0.1'
+    implementation 'com.android.tools.build:gradle:4.1.2'
     implementation 'org.ow2.asm:asm:8.0.1'
     implementation 'org.ow2.asm:asm-commons:8.0.1'
 }

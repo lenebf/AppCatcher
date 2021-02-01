@@ -39,7 +39,7 @@ public class AppCatcherClassVisitor extends ClassVisitor {
         } else if (MAIN_APP_NAME.equals(superName)) {
             catcherClassName = name;
             catcherClassPath = classPath;
-            buildCatchedApps();
+            buildCaughtApps();
         }
     }
 
@@ -48,18 +48,18 @@ public class AppCatcherClassVisitor extends ClassVisitor {
         catcherClassPath = null;
     }
 
-    private static void buildCatchedApps() {
+    private static void buildCaughtApps() {
         if (componentAppNames.isEmpty() || catcherClassName == null || catcherClassPath == null) {
             return;
         }
         System.out.println("ACClassVisitor ------> " + catcherClassPath);
         int nameIndex = catcherClassName.lastIndexOf("/");
-        String className = catcherClassName.substring(0, nameIndex + 1) + "CatchedApps";
+        String className = catcherClassName.substring(0, nameIndex + 1) + "CaughtApps";
 
         ClassWriter cw = new ClassWriter(0);
         // 创建新的类
         cw.visit(Opcodes.V1_7, Opcodes.ACC_PUBLIC + Opcodes.ACC_SUPER, className, null, "java/lang/Object", null);
-        cw.visitSource("CatchedApps.java", null);
+        cw.visitSource("CaughtApps.java", null);
         // 声明 componentApps 变量
         FieldVisitor fv = cw.visitField(Opcodes.ACC_PUBLIC, "componentApps", "Ljava/util/List;", "Ljava/util/List<Ljava" +
                 "/lang/String;>;", null);
@@ -90,7 +90,7 @@ public class AppCatcherClassVisitor extends ClassVisitor {
         byte[] bytes = cw.toByteArray();
 
         nameIndex = catcherClassPath.lastIndexOf(File.separator);
-        String classPath = catcherClassPath.substring(0, nameIndex + 1) + "CatchedApps.class";
+        String classPath = catcherClassPath.substring(0, nameIndex + 1) + "CaughtApps.class";
 
         FileOutputStream outputStream = null;
         try {

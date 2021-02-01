@@ -5,7 +5,7 @@ apply plugin: 'com.android.library'
 
 ext {
     libGroupId = 'com.lenebf.ac'
-    libVersion = releaseVersion
+    libVersion = ac_version
 }
 
 task sourcesJar(type: Jar) {
@@ -33,6 +33,13 @@ tasks.withType(Javadoc) {
 }
 
 publishing {
+    // 本地测试仓库
+    repositories {
+        maven {
+            // $rootDir 表示你项目的根目录
+            url = "$rootDir/repo"
+        }
+    }
     publications {
         MyPublication(MavenPublication) {
             artifact("$buildDir/outputs/aar/lib_component_application-release.aar")

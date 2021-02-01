@@ -69,9 +69,9 @@ public abstract class MainApplication extends Application {
 
     private List<String> getComponentApplications(@NonNull Context context) {
         String packageName = context.getPackageName();
-        String catchedAppsClassName = packageName + ".CatchedApps";
+        String caughtAppsClassName = packageName + ".CaughtApps";
         try {
-            Class<?> helpClass = Class.forName(catchedAppsClassName);
+            Class<?> helpClass = Class.forName(caughtAppsClassName);
             Field subAppsField = helpClass.getField("componentApps");
             Object helperObject = helpClass.newInstance();
             return (List<String>) subAppsField.get(helperObject);
